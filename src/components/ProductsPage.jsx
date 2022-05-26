@@ -5,7 +5,6 @@ import ProductTable from './ProductTable';
 import SearchBar from './SearchBar';
 
 function ProductsPage() {
-    const [products, setProducts] = useState(jsonData);
     const [search, setSearch] = useState('')
     const [onlyInStock, setOnlyInStock] = useState(false)
   return (
@@ -13,8 +12,10 @@ function ProductsPage() {
         <h1>IronStore</h1>
         <SearchBar setSearch={setSearch} setOnlyInStock={setOnlyInStock}/>
         <ProductTable 
-            products={jsonData.filter((product) => onlyInStock ? product.inStock : true && product.name.toLowerCase().includes(search.toLowerCase()))}
-
+            products={jsonData.filter((product) => {
+            return ((onlyInStock ? product.inStock : true) && (product.name.toLowerCase().includes(search.toLowerCase())))
+            }
+            )}
             />
     </div>
   )
