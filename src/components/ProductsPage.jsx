@@ -6,11 +6,15 @@ import SearchBar from './SearchBar';
 
 function ProductsPage() {
     const [products, setProducts] = useState(jsonData);
+    const [search, setSearch] = useState('')
   return (
     <div>
         <h1>IronStore</h1>
-        <SearchBar/>
-        <ProductTable products={jsonData}/>
+        <SearchBar setSearch={setSearch}/>
+        <ProductTable 
+            products={jsonData.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))}
+
+            />
     </div>
   )
 }
